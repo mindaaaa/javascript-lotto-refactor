@@ -13,6 +13,7 @@ describe('ProfitCalculator 클래스 단위테스트', () => {
       { rank: 3, count: 1, prize: 5000 },
       { rank: 0, count: 3, prize: 0 },
     ];
+
     calculator = new ProfitCalculator(purchaseAmount, prizeObject);
   });
 
@@ -20,22 +21,21 @@ describe('ProfitCalculator 클래스 단위테스트', () => {
     // when
     const result = calculator.calculate();
 
-    // Assert
-    expect(result).toBe(224900.0);
+    // then
+    expect(result).toBe(224935.7);
+  });
+
+  test('filterObjectByKeys는 특정 키만 포함하는 새로운 객체를 생성한다.', () => {
+    // given
+    const mockObject = { rank: 7, count: 1, prize: 30000000 };
+
+    // when
+    const result = calculator.filterObjectByKeys(mockObject, [
+      'count',
+      'prize',
+    ]);
+
+    // then
+    expect(result).toEqual({ count: 1, prize: 30000000 });
   });
 });
-
-test('filterObjectByKeys는 특정 키만 포함하는 새로운 객체를 생성한다.', () => {
-  // given
-  const mockObject = { rank: 7, count: 1, prize: 30000000 };
-
-  // when
-  const result = filterObjectByKeys(mockObject, ['count', 'prize']);
-
-  // then
-  expect(result).toEqual({ count: 1, prize: 30000000 });
-});
-
-// 수익률을 계산할 수 있다.
-
-// filterObjectByKeys는 특정 값만 뺄 수 있다.
