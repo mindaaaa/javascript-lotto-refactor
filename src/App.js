@@ -10,9 +10,11 @@ class App {
     const winningNumbers = await this.getValidatedWinningNumbers();
     const bonusNumber = await this.getValidatedBonusNumber();
 
-    const numbers = {
+    // TODO: LottoMachine.issue()로 tickets 배열도 가져오기
+    const lotto = {
       winningNumbers,
       bonusNumber,
+      tickets,
     };
 
     // TODO: 결과값 저장
