@@ -5,6 +5,8 @@ import ConsoleOutput from './infrastructure/ConsoleOutput.js';
 class App {
   async run() {
     const purchaseAmount = await this.getValidatedPurchaseAmount();
+    const ticketCount = purchaseAmount / 1000;
+
     const winningNumbers = await this.getValidatedWinningNumbers();
     const bonusNumber = await this.getValidatedBonusNumber();
 
