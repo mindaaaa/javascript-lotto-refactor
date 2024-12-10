@@ -12,9 +12,14 @@ class MatchingLotto {
   #bonusNumbers;
   #tickets;
 
+  // note: tickets가 private이라 set을 통해 테스트 환경 주입
   constructor({ winningNumbers, bonusNumber, tickets }) {
     this.#winningNumbers = winningNumbers;
     this.#bonusNumbers = bonusNumber;
+    this.#tickets = tickets;
+  }
+
+  setTickets() {
     this.#tickets = tickets;
   }
 
@@ -24,11 +29,25 @@ class MatchingLotto {
 
       if (matchCount === 5) {
         this.#bonusMatch(ticket);
-      } else {
-        const reward = REWARD.find((reward) => reward.rank === matchCount);
+      }
+
+      const reward =
+        REWARD.find((reward) => reward.rank === matchCount) ||
+        REWARD.find((reward) => reward.rank === 0);
+      if (reward) {
         reward.count++;
       }
+
+      if (!reward) {
+        const lose = REWARD.find((reward) => reward.rank === 0);
+        lose.count++;
+      }
     });
+    return this.getReward();
+  }
+
+  getReward() {
+    return [...REWARD];
   }
 
   #findMatches(ticket) {
@@ -39,7 +58,7 @@ class MatchingLotto {
     return matchedNumbers.length;
   }
 
-  #bonusMatch() {
+  #bonusMatch(ticket) {
     const hasBonus = this.#isMatchWithBonus(ticket);
 
     if (hasBonus) {
