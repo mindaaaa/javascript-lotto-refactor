@@ -29,13 +29,13 @@ class MatchingLotto {
 
       if (matchCount === 5) {
         this.#bonusMatch(ticket);
+      } else {
+        const reward =
+          REWARD.find((reward) => reward.rank === matchCount) ||
+          REWARD.find((reward) => reward.rank === 0);
+
+        reward.count++;
       }
-
-      const reward =
-        REWARD.find((reward) => reward.rank === matchCount) ||
-        REWARD.find((reward) => reward.rank === 0);
-
-      reward.count++;
     });
     return this.getReward();
   }
