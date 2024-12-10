@@ -13,10 +13,10 @@ class LottoMachine {
     const tickets = [];
 
     for (let i = 0; i <= this.#ticketCount; i++) {
-      tickets.push(Random.pickUniqueNumbersInRange(1, 45, 6));
-    }
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
 
-    console.log(tickets);
+      tickets.push(numbers.sort((a, b) => a - b));
+    }
     return tickets;
   }
 }
