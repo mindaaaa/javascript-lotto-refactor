@@ -35,7 +35,7 @@ class Validator {
   }
 
   #validateNumbersNaN(winningNumbers) {
-    winningNumbers.some(isNaN(number));
+    winningNumbers.some((number) => isNaN(number));
   }
 
   // 보너스번호랑 중복 안되는지
@@ -44,7 +44,7 @@ class Validator {
       throw new Error('[ERROR] 보너스 번호를 숫자로 입력해주세요.');
     }
 
-    if (!this.#validateDuplicateNumbers(winningNumbers, bonusNumber)) {
+    if (this.#validateDuplicateNumbers(winningNumbers, bonusNumber)) {
       throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
     }
   }

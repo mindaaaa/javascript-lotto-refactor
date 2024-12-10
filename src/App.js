@@ -16,7 +16,7 @@ class App {
     this.#printIssuer(ticketCount, tickets);
 
     const winningNumbers = await this.getValidatedWinningNumbers();
-    const bonusNumber = await this.getValidatedBonusNumber();
+    const bonusNumber = await this.getValidatedBonusNumber(winningNumbers);
 
     // 로또 맞추기
     const matchingLotto = new MatchingLotto({
@@ -38,8 +38,8 @@ class App {
     while (true) {
       try {
         const purchaseAmount = await this.#getPurchaseAmount();
-        const validator = new Validator(purchaseAmount);
-        validator.validatePurchaseAmount();
+        const validator = new Validator();
+        validator.validatePurchaseAmount(purchaseAmount);
 
         return purchaseAmount;
       } catch (error) {
@@ -74,12 +74,12 @@ class App {
   }
 
   // TODO: 보너스 번호
-  async getValidatedBonusNumber() {
+  async getValidatedBonusNumber(winningNumbers) {
     while (true) {
       try {
         const bonusNumber = await this.#getBonusNumber();
         const validator = new Validator();
-        validator.validateBonusNumbers(bonusNumber);
+        validator.validateBonusNumbers(winningNumbers, bonusNumber);
 
         return bonusNumber;
       } catch (error) {
