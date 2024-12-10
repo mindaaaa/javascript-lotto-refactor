@@ -4,21 +4,15 @@ import ProfitCalculator from './ProfitCalculator.js';
 
 class LottoManager {
   #purchaseAmount;
-  #ticketCount;
   #winningNumbers;
   #bonusNumbers;
 
-  constructor({ purchaseAmount, ticketCount, winningNumbers, bonusNumber }) {
+  constructor({ purchaseAmount, winningNumbers, bonusNumber }) {
     this.#purchaseAmount = purchaseAmount;
-    this.#ticketCount = ticketCount;
     this.#winningNumbers = winningNumbers;
     this.#bonusNumbers = bonusNumber;
   }
   release() {
-    const machine = new LottoMachine(this.#ticketCount);
-    // 로또 발행
-    const tickets = machine.issue();
-
     const params = {
       winningNumbers: this.#winningNumbers,
       bonusNumbers: this.#bonusNumbers,
