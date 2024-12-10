@@ -13,9 +13,11 @@ class LottoMachine {
     const tickets = [];
 
     for (let i = 0; i < this.#ticketCount; i++) {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+        (a, b) => a - b
+      );
 
-      tickets.push(numbers.sort((a, b) => a - b));
+      tickets.push(new Lotto(numbers));
     }
     return tickets;
   }

@@ -14,7 +14,6 @@ class ProfitCalculator {
     });
 
     const totalCash = cash.reduce((acc, curr) => acc + curr, 0);
-    console.log(totalCash);
     const profit = this.#profit(totalCash, this.#purchaseAmount);
     return Math.round(profit * 10) / 10;
   }
