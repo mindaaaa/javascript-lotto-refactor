@@ -23,17 +23,7 @@ class MatchingLotto {
       const matchCount = this.#findMatches(ticket);
 
       if (matchCount === 5) {
-        const hasBonus = this.#isMatchWithBonus(ticket);
-        if (hasBonus) {
-          const reward = REWARD.find((reward) => reward.rank === 7);
-          reward.count++;
-        }
-
-        if (!hasBonus) {
-          const reward = REWARD.find((reward) => reward.rank === 5);
-          reward.count++;
-        }
-        REWARD.find((reward) => reward.rank);
+        this.#bonusMatch(ticket);
       } else {
         const reward = REWARD.find((reward) => reward.rank === matchCount);
         reward.count++;
@@ -47,6 +37,18 @@ class MatchingLotto {
     );
 
     return matchedNumbers.length;
+  }
+
+  #bonusMatch() {
+    const hasBonus = this.#isMatchWithBonus(ticket);
+
+    if (hasBonus) {
+      const reward = REWARD.find((reward) => reward.rank === 7);
+      return reward.count++;
+    }
+
+    const reward = REWARD.find((reward) => reward.rank === 5);
+    return reward.count++;
   }
 
   #isMatchWithBonus(ticket) {
