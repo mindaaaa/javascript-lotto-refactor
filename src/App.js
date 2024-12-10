@@ -1,8 +1,9 @@
-import LottoManager from './domain/LottoManager.js';
 import ConsoleInput from './infrastructure/ConsoleInput.js';
 import ConsoleOutput from './infrastructure/ConsoleOutput.js';
 import MatchingLotto from './domain/MatchingLotto.js';
 import ProfitCalculator from './domain/ProfitCalculator.js';
+import LottoMachine from './domain/LottoMachine.js';
+import Validator from './validation/Validator.js';
 
 class App {
   async run() {
@@ -10,7 +11,7 @@ class App {
     const ticketCount = purchaseAmount / 1000;
 
     // 로또 발행
-    const machine = new LottoMachine(ticketCount);
+    const machine = new LottoMachine(Number(ticketCount));
     const tickets = machine.issue();
     this.#printIssuer(ticketCount, tickets);
 
@@ -18,11 +19,11 @@ class App {
     const bonusNumber = await this.getValidatedBonusNumber();
 
     // 로또 맞추기
-    const matchingLotto = new MatchingLotto(
+    const matchingLotto = new MatchingLotto({
       winningNumbers,
       bonusNumber,
-      tickets
-    );
+      tickets,
+    });
     const reward = matchingLotto.match();
     this.#printMatchingResult(reward);
 
@@ -37,8 +38,8 @@ class App {
     while (true) {
       try {
         const purchaseAmount = await this.#getPurchaseAmount();
-        //const validator = new Validator(purchaseAmount);
-        //validator.validateMethod();
+        const validator = new Validator(purchaseAmount);
+        validator.validatePurchaseAmount();
 
         return purchaseAmount;
       } catch (error) {
@@ -57,8 +58,8 @@ class App {
     while (true) {
       try {
         const winningNumbers = await this.#getWinningNumbers();
-        //const validator = new Validator(winningNumbers);
-        //validator.validateMethod();
+        const validator = new Validator();
+        validator.validateWinningNumbers(winningNumbers);
 
         return winningNumbers;
       } catch (error) {
@@ -77,8 +78,8 @@ class App {
     while (true) {
       try {
         const bonusNumber = await this.#getBonusNumber();
-        //const validator = new Validator(bonusNumber);
-        //validator.validateMethod();
+        const validator = new Validator();
+        validator.validateBonusNumbers(bonusNumber);
 
         return bonusNumber;
       } catch (error) {
@@ -93,39 +94,37 @@ class App {
 
   #printIssuer(ticketCount, tickets) {
     ConsoleOutput.write(`${ticketCount}개를 구매했습니다.\n`);
-    tickets.forEach((ticket) => ConsoleOutput.write(`${ticket}\n`));
+    tickets.forEach((ticket) => ConsoleOutput.write(`${ticket.toString()}`));
   }
 
   #printMatchingResult(reward) {
-    ConsoleOutput.write(`\n당첨 통계\n`);
-    ConsoleOutput.write('---\n');
+    ConsoleOutput.write(`\n당첨 통계`);
+    ConsoleOutput.write('---');
     ConsoleOutput.write(
-      `3개 일치 (5,000원) - ${reward.find((item) => item.rank === 3).count}개\n`
+      `3개 일치 (5,000원) - ${reward.find((item) => item.rank === 3).count}개`
     );
     ConsoleOutput.write(
-      `4개 일치 (50,000원) - ${
-        reward.find((item) => item.rank === 4).count
-      }개\n`
+      `4개 일치 (50,000원) - ${reward.find((item) => item.rank === 4).count}개`
     );
     ConsoleOutput.write(
       `5개 일치 (1,500,000원) - ${
         reward.find((item) => item.rank === 5).count
-      }개\n`
+      }개`
     );
     ConsoleOutput.write(
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${
         reward.find((item) => item.rank === 7).count
-      }개\n`
+      }개`
     );
     ConsoleOutput.write(
       `6개 일치 (2,000,000,000원) - ${
         reward.find((item) => item.rank === 6).count
-      }개\n`
+      }개`
     );
   }
 
   #printProfit(profit) {
-    ConsoleOutput.write(`\n총 수익률은 ${profit}입니다.`);
+    ConsoleOutput.write(`총 수익률은 ${profit}%입니다.`);
   }
 }
 

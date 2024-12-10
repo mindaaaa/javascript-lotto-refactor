@@ -39,6 +39,6 @@ describe('Lotto클래스 단위테스트', () => {
     const result = lotto.toString();
 
     // then
-    expect(result).toBe('8, 21, 23, 41, 42, 43');
+    expect(result).toBe('[8, 21, 23, 41, 42, 43]');
   });
 });

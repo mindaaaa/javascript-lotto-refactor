@@ -15,7 +15,7 @@ class ProfitCalculator {
 
     const totalCash = cash.reduce((acc, curr) => acc + curr, 0);
     const profit = this.#profit(totalCash, this.#purchaseAmount);
-    return Math.round(profit * 10) / 10;
+    return Number(profit.toFixed(1));
   }
 
   filterObjectByKeys(prizeObject, keys) {
@@ -28,7 +28,7 @@ class ProfitCalculator {
   }
 
   #profit(totalCash, purchaseAmount) {
-    return ((totalCash - purchaseAmount) / purchaseAmount) * 100;
+    return (totalCash / purchaseAmount) * 100;
   }
 }
 

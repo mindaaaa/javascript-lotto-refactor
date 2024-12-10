@@ -25,7 +25,7 @@ class Lotto {
 
   // 8, 21, 23, 41, 42, 43
   toString() {
-    return this.#numbers.join(', ');
+    return `[${this.#numbers.join(', ')}]`;
   }
 }
 

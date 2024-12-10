@@ -22,7 +22,7 @@ describe('ProfitCalculator 클래스 단위테스트', () => {
     const result = calculator.calculate();
 
     // then
-    expect(result).toBe(224935.7);
+    expect(result).toBe(225035.7);
   });
 
   test('filterObjectByKeys는 특정 키만 포함하는 새로운 객체를 생성한다.', () => {
