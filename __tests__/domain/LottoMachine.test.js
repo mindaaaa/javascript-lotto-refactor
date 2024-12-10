@@ -1,4 +1,5 @@
-import LottoMachine from '../../src/domain/LottoMachine';
+import LottoMachine from '../../src/domain/LottoMachine.js';
+import Lotto from '../../src/domain/Lotto.js';
 
 describe('LottoMachine클래스 단위테스트', () => {
   test('issue는 ticketCount만큼 로또를 발행한다.', () => {
@@ -11,6 +12,11 @@ describe('LottoMachine클래스 단위테스트', () => {
 
     // then
     expect(result).toHaveLength(4);
-    expect(result[1]).toHaveLength(6);
+    result.forEach((ticket) => {
+      expect(ticket).toBeInstanceOf(Lotto);
+    });
+    result.forEach((ticket) => {
+      expect(ticket.getNumbers()).toHaveLength(6);
+    });
   });
 });

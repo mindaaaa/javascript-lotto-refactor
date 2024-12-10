@@ -1,4 +1,4 @@
-import MatchingLotto from '../../src/domain/MatchingLotto';
+import MatchingLotto from '../../src/domain/MatchingLotto.js';
 
 describe('MatchingLotto 클래스 단위테스트', () => {
   let tickets; // note: beforeEach 선언은 꼭 describe 절에서!!

@@ -1,4 +1,4 @@
-import Lotto from '../../src/domain/Lotto';
+import Lotto from '../../src/domain/Lotto.js';
 
 describe('Lotto클래스 단위테스트', () => {
   test('numbers가 6개로 이뤄지지 않는 경우 에러를 던진다.', () => {

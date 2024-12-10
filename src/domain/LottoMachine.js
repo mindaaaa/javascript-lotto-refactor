@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 // 발행할 티켓 개수를 입력받아 티켓을 발매한다.
 class LottoMachine {

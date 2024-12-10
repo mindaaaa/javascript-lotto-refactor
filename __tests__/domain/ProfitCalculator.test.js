@@ -1,4 +1,4 @@
-import ProfitCalculator from '../../src/domain/ProfitCalculator';
+import ProfitCalculator from '../../src/domain/ProfitCalculator.js';
 
 describe('ProfitCalculator 클래스 단위테스트', () => {
   let calculator;
