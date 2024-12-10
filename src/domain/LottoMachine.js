@@ -12,7 +12,7 @@ class LottoMachine {
   issue() {
     const tickets = [];
 
-    for (let i = 0; i <= this.#ticketCount; i++) {
+    for (let i = 0; i < this.#ticketCount; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
 
       tickets.push(numbers.sort((a, b) => a - b));
