@@ -1,5 +1,3 @@
-import { ERROR_MESSAGES, LOTTO } from '../utils/constants.js';
-
 class Lotto {
   #numbers;
 
@@ -9,32 +7,25 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO.WINNING_NUMBERS_COUNT) {
-      throw new Error(ERROR_MESSAGES.INVALID_NUMBER_COUNT);
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개로 이루어져있습니다.');
     }
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== numbers.length) {
-      throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBER);
+      throw new Error(
+        '[ERROR] 로또는 중복되지 않는 6개의 숫자로 이루어져있습니다.'
+      );
     }
   }
 
+  // [1,2,3,4,5,6]
   getNumbers() {
     return this.#numbers;
   }
 
+  // 8, 21, 23, 41, 42, 43
   toString() {
-    return `[${this.#numbers.join(', ')}]`;
-  }
-
-  getMatchedCount(winningNumbers) {
-    const set = new Set(this.#numbers);
-    const matchedNumbers = winningNumbers.filter((number) => set.has(number));
-
-    return matchedNumbers.length;
-  }
-
-  isBonusMatched(bonusNumber) {
-    return this.#numbers.includes(bonusNumber);
+    return this.#numbers.join(', ');
   }
 }
 
