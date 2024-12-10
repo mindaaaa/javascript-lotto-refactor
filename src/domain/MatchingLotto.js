@@ -45,9 +45,9 @@ class MatchingLotto {
   }
 
   #findMatches(ticket) {
-    const matchedNumbers = ticket.filter((number) =>
-      this.#winningNumbers.includes(number)
-    );
+    const matchedNumbers = ticket
+      .getNumbers()
+      .filter((number) => this.#winningNumbers.includes(number));
 
     return matchedNumbers.length;
   }
@@ -65,7 +65,7 @@ class MatchingLotto {
   }
 
   #isMatchWithBonus(ticket) {
-    return ticket.includes(this.#bonusNumbers);
+    return ticket.getNumbers().includes(this.#bonusNumbers);
   }
 }
 
