@@ -34,14 +34,8 @@ class MatchingLotto {
       const reward =
         REWARD.find((reward) => reward.rank === matchCount) ||
         REWARD.find((reward) => reward.rank === 0);
-      if (reward) {
-        reward.count++;
-      }
 
-      if (!reward) {
-        const lose = REWARD.find((reward) => reward.rank === 0);
-        lose.count++;
-      }
+      reward.count++;
     });
     return this.getReward();
   }
